@@ -1,14 +1,31 @@
 import React, { Component } from 'react';
 import './App.css';
+import { Route, Switch } from 'react-router-dom';
+import Header from './Header';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        
-      </div>
-    );
-  }
+
+const My404 = () => {
+  return (
+    <div>
+      You are lost!!!!
+    </div>
+  )
+}
+
+const App = () => {
+  return (
+    
+    <div>
+      <Header />
+      <main>
+        <Switch>
+          
+          <Route component={ My404 } />
+        </Switch>
+      </main>
+    </div>
+
+  )
 }
 
 export default App;
