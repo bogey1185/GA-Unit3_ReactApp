@@ -75,22 +75,55 @@ class RegisterUser extends Component {
           })
         }
 
-      } else {
-
       //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
       //              Create new Tenant                 //
       //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+      } else {
 
+        //create package of data to create new account
+        const newUser = {
+          firstName: this.state.firstName,
+          lastName: this.state.lastName,
+          username: this.state.username,
+          password: this.state.password,
+          email: this.state.email
+        }
 
+        //send data to server to create user
+        const createUserRequest = await fetch('http://localhost:9000/api/v1/users/registerTenant', {
+          method: 'POST',
+          // credentials: 'include',
+          body: JSON.stringify(newUser),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+
+        //throw error if create failed
+        if(!createUserRequest.ok) {
+          throw Error(createUserRequest.statusText)
+        }
+
+        //recieve response from server and parse from json
+        const parsedCreateRequest = await createUserRequest.json();
         
-      }
+        //if create successful, return to login page
+        if (parsedCreateRequest.data === 'user created!') {
+          this.props.history.push('/');
+
+        } else {
           
+          //if create unsuccessful because username taken, update
+          //state with error message so it can render!
+          this.setState({
+            errorMsg: 'Username taken. Please try again.'
+          })
+        }
+      }       
     } catch (err) {
       console.log(err);
       return(err);
-    
     }
-
   }
 
 
