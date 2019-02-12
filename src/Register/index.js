@@ -69,7 +69,7 @@ class RegisterUser extends Component {
         } else {
           
           //if create unsuccessful because username taken, update
-          //state with error message, which will display!
+          //state with error message so it can render!
           this.setState({
             errorMsg: 'Username taken. Please try again.'
           })
