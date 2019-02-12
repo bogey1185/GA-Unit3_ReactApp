@@ -103,19 +103,37 @@ class Login extends Component {
             <br />
             <label>
               Username:<br />
-              <input type="text" onChange={this.handleChange} value={this.state.username} name="username" required/><br />
+              <input 
+                type="text" 
+                onChange={this.handleChange} 
+                value={this.state.username} 
+                name="username" 
+                required
+              /><br />
             </label><br />
             <label>
               Password:<br />
-              <input type="password" onChange={this.handleChange} value={this.state.password} name="password" required/><br />
+              <input 
+                type="password" 
+                onChange={this.handleChange} 
+                value={this.state.password} 
+                name="password" 
+                required
+              /><br />
             </label><br />
             {this.state.userDesignation === 'tenant' ? 
               <label>  
                 Property Code:<br />
-                <input type={this.state.userDesignation === 'tenant' ? "text" : "hidden"} onChange={this.handleChange} value={this.state.propertyCode} name="propertyCode" required/><br />
+                <input 
+                  type="text" 
+                  onChange={this.handleChange} 
+                  value={this.state.propertyCode} 
+                  name="propertyCode" 
+                  required
+                /><br />
               </label>
             : null}
-            <input type="hidden" name="userDesignation" value="tenant" /><br />
+
             <input type="Submit" />
           </form>
           <br />

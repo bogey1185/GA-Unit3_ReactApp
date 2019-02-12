@@ -5,6 +5,7 @@ import Header from './Header';
 import Login from './Login';
 import TenantHome from './TenantHome';
 import LandlordHome from './LandlordHome';
+import Register from './Register';
 
 
 const My404 = () => {
@@ -23,6 +24,7 @@ const App = () => {
       <main>
         <Switch>
           <Route exact path="/" component={ Login } /> 
+          <Route exact path="/register" component={ Register } /> 
           <Route exact path="/landlord" component={ LandlordHome } />
           <Route exact path="/tenant" component={ TenantHome } />
           <Route component={ My404 } />
