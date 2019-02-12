@@ -3,6 +3,8 @@ import './App.css';
 import { Route, Switch } from 'react-router-dom';
 import Header from './Header';
 import Login from './Login';
+import TenantHome from './TenantHome';
+import LandlordHome from './LandlordHome';
 
 
 const My404 = () => {
@@ -21,6 +23,8 @@ const App = () => {
       <main>
         <Switch>
           <Route exact path="/" component={ Login } /> 
+          <Route exact path="/landlord" component={ LandlordHome } />
+          <Route exact path="/tenant" component={ TenantHome } />
           <Route component={ My404 } />
         </Switch>
       </main>
