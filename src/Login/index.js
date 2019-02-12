@@ -130,10 +130,10 @@ class Login extends Component {
                   value={this.state.propertyCode} 
                   name="propertyCode" 
                   required
-                /><br />
+                />
+                <br /><br />
               </label>
             : null}
-
             <input type="Submit" />
           </form>
           <br />

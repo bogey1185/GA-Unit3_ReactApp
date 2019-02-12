@@ -13,7 +13,8 @@ class RegisterUser extends Component {
       businessName: '',
       username: '', 
       password: '', 
-      email: ''
+      email: '',
+      errorMsg: 'Username taken.'
     }
   }
 
@@ -21,6 +22,68 @@ class RegisterUser extends Component {
     this.setState({
       [event.target.name]: event.target.value
     });
+  }
+
+  handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      
+      if (this.state.userDesignation === 'landlord') {
+        //if the created account is a landlord account go this path
+
+        //create package of data to create new account
+        const newUser = {
+          firstName: this.state.firstName,
+          lastName: this.state.lastName,
+          businessName: this.state.businessName,
+          username: this.state.username,
+          password: this.state.password,
+          email: this.state.email
+        }
+
+        //send data to server to create user
+        const createUserRequest = await fetch('http://localhost:9000/api/v1/users/registerLandlord', {
+          method: 'POST',
+          // credentials: 'include',
+          body: JSON.stringify(newUser),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+
+        //throw error if create failed
+        if(!createUserRequest.ok) {
+          throw Error(createUserRequest.statusText)
+        }
+
+        //recieve response from server and parse from json
+        const parsedCreateRequest = createUserRequest.json();
+
+        //if create successful, return to login page
+        if (parsedCreateRequest.data === 'user created!') {
+          console.log(parsedCreateRequest);
+          this.props.history.push('/login');
+        } else {
+          //if create unsuccessful because username taken, update
+          //state with error message, which will display!
+          this.setState({
+            errorMsg: 'Username taken. Please try again.'
+          })
+        }
+
+
+
+
+      } else {
+        // if created account is tenant account go this path
+      }
+          
+    } catch (err) {
+      console.log(err);
+      return(err);
+    
+    }
+
   }
 
 
@@ -133,6 +196,7 @@ class RegisterUser extends Component {
           </form>
           <br />
           
+          {this.state.errorMsg ? <small>{this.state.errorMsg}</small> : null}
         </section>
       </div>
     )
