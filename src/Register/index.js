@@ -60,13 +60,14 @@ class RegisterUser extends Component {
         }
 
         //recieve response from server and parse from json
-        const parsedCreateRequest = createUserRequest.json();
-        console.log(parsedCreateRequest);
+        const parsedCreateRequest = await createUserRequest.json();
+        
         //if create successful, return to login page
         if (parsedCreateRequest.data === 'user created!') {
-          console.log(parsedCreateRequest);
-          this.props.history.push('/login');
+          this.props.history.push('/');
+
         } else {
+          
           //if create unsuccessful because username taken, update
           //state with error message, which will display!
           this.setState({
