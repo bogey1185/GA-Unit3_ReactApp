@@ -14,7 +14,7 @@ class RegisterUser extends Component {
       username: '', 
       password: '', 
       email: '',
-      errorMsg: 'Username taken.'
+      errorMsg: ''
     }
   }
 
@@ -27,10 +27,13 @@ class RegisterUser extends Component {
   handleSubmit = async (event) => {
     event.preventDefault();
     try {
+
+      //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+      //              Create new Landlord               //
+      //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
       
       if (this.state.userDesignation === 'landlord') {
-        //if the created account is a landlord account go this path
-
+        
         //create package of data to create new account
         const newUser = {
           firstName: this.state.firstName,
@@ -58,7 +61,7 @@ class RegisterUser extends Component {
 
         //recieve response from server and parse from json
         const parsedCreateRequest = createUserRequest.json();
-
+        console.log(parsedCreateRequest);
         //if create successful, return to login page
         if (parsedCreateRequest.data === 'user created!') {
           console.log(parsedCreateRequest);
@@ -71,11 +74,14 @@ class RegisterUser extends Component {
           })
         }
 
-
-
-
       } else {
-        // if created account is tenant account go this path
+
+      //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+      //              Create new Tenant                 //
+      //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+
+        
       }
           
     } catch (err) {
