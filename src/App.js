@@ -8,7 +8,7 @@ import Login from './Login';
 const My404 = () => {
   return (
     <div>
-      You are lost!!!!
+      Error 404: Page Not Found
     </div>
   )
 }

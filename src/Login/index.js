@@ -11,11 +11,25 @@ class Login extends Component {
     super();
     this.state = {
       userLogged: false,
-      userStatus: ''
+      userDesignation: '', 
+      tenantUsername: '', 
+      tenantPassword: '',
+      tenantPropertyCode: '',
+      landlordUsername: '',
+      landlordPassword: ''
     }
   }
 
+  handleChange = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
+  }
+
+
   render() {
+
+    console.log(this.state);
     return(
       <div>
         <section>
@@ -24,17 +38,17 @@ class Login extends Component {
             <h4>Tenant Login</h4>
             <label>
               Username:
-              <input type="text" name="username" />
+              <input type="text" onChange={this.handleChange} value={this.state.tenantUsername} name="tenantUsername" />
             </label>
             <label>
               Password:
-              <input type="password" name="password" />
+              <input type="password" onChange={this.handleChange} value={this.state.tenantPassword} name="tenantPassword" />
             </label>
             <label>
               Property Code:
-              <input type="text" name="property-code" />
+              <input type="text" onChange={this.handleChange} value={this.state.tenantPropertyCode} name="tenantPropertyCode" />
             </label>
-            <input type="hidden" name="user-designation" value="tenant" />
+            <input type="hidden" name="userDesignation" value="tenant" />
             <input type="Submit" />
           </form>
 
@@ -46,13 +60,13 @@ class Login extends Component {
             <h4>Landlord Login</h4>
             <label>
               Username:
-              <input type="text" name="username" />
+              <input type="text" onChange={this.handleChange} value={this.state.landlordUsername} name="landlordUsername" />
             </label>
             <label>
               Password:
-              <input type="password" name="password" />
+              <input type="password" onChange={this.handleChange} value={this.state.landlordPassword} name="landlordPassword" />
             </label>
-            <input type="hidden" name="user-designation" value="landlord" />
+            <input type="hidden" name="userDesignation" value="landlord" />
             <input type="Submit" />
           </form>
 
