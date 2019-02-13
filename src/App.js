@@ -18,40 +18,7 @@ const My404 = () => {
 
 class App extends Component {
 
-  constructor() {
-    super();
 
-    this.state = {
-      street: '',
-      unit: '',
-      city: '',
-      state: 'choose',
-      zipCode: '',
-      propertyCode: '',
-      readOnly: false, 
-      userState: {
-        firstName: '',
-        lastName: '',
-        businessName: '',
-        username: '',
-        email: '',
-        propertyList: []
-      }
-    }
-  }
-
-  handleLandlordLogin = (newState) => {
-    this.setState({
-      userState: {
-        firstName: newState.firstName,
-        lastName: newState.lastName,
-        businessName: newState.businessName,
-        username: newState.username,
-        email: newState.email,
-        propertyList: newState.propertyList
-      }
-    });
-  }
 
   render() {
     return(
@@ -60,9 +27,9 @@ class App extends Component {
         <Header />
         <main>
           <Switch>
-            <Route exact path="/" render={(props) => <Login {...props} handleLandlordLogin={this.handleLandlordLogin} state={this.state}/>}  /> 
+            <Route exact path="/" component={ Login } /> 
             <Route exact path="/register" component={ Register } /> 
-            <Route exact path="/landlord" render={(props) => <LandlordHome {...props} state={this.state}/>}  />
+            <Route exact path="/landlord" component={ LandlordHome }  />
             <Route exact path="/tenant" component={ TenantHome } />
             <Route component={ My404 } />
           </Switch>

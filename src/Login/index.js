@@ -34,7 +34,7 @@ class Login extends Component {
         username: this.state.username,
         password: this.state.password
       }
-
+                        
       const loginResponse = await fetch(`http://localhost:9000/api/v1/users/${loginPath}`, {
         method: 'POST',
         // credentials: 'included',
@@ -52,8 +52,7 @@ class Login extends Component {
 
         if (this.state.userDesignation === 'landlord') {
 
-          this.props.handleLandlordLogin(parsedLoginResponse.data);
-          this.props.history.push('/landlord');
+          this.props.history.push({pathname: '/landlord', state: parsedLoginResponse.data});
           
         } else {
           //if we are logging in as a tenant, we

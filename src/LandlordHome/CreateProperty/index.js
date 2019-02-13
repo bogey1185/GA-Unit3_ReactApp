@@ -6,9 +6,16 @@ class CreateProperty extends Component {
   constructor() {
     super();
 
+    this.state = {
+      street: '',
+      unit: '',
+      city: '', 
+      state: '', 
+      zipCode: ''
+    }
   }
 
-  componentWillMount = () => {
+  componentDidMount = () => {
     this.setState(this.props.state)
   }
 
@@ -19,8 +26,6 @@ class CreateProperty extends Component {
   }
 
   render() {
-    console.log(this.state, 'create property state');
-    console.log(this.props, 'create property props');
     return (
       <div>
         
@@ -38,7 +43,7 @@ class CreateProperty extends Component {
           </label><br />
 
           <label>
-            Unit:
+            Unit/Apt/Suite:
             <input
               type="text"
               onChange={this.handleChange}
