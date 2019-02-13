@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-
 class CreateProperty extends Component {
 
   constructor() {
@@ -25,12 +24,25 @@ class CreateProperty extends Component {
     })
   }
 
+  handleSubmit = (event) => {
+    event.preventDefault();
+    this.props.addProperty(this.state);
+    // clear state
+    this.setState({
+      street: '',
+      unit: '',
+      city: '', 
+      state: '', 
+      zipCode: ''
+    })
+  }
+
   render() {
     return (
       <div>
         
         <h4>Create New Property</h4>
-        <form onSubmit={this.props.addProperty.bind(null, this.state)}>
+        <form onSubmit={this.handleSubmit}>
           <label>
             Street Address:
             <input
@@ -126,7 +138,6 @@ class CreateProperty extends Component {
               onChange={this.handleChange}
               value={this.state.zipCode}
               name="zipCode"
-              required
             />
           </label><br />
 

@@ -17,21 +17,22 @@ class DisplayProperty extends Component {
 
     console.log(this.state, 'DisplayProperty STATE');
 
-    const Properties = this.state.propertyList.map((property) => {
+    const properties = this.props.properties.map((property) => {
       return(
         <div key={property._id}>
           {property.street}
           {property.unit ? `, ${property.unit}, ` : ', '}
-          {property.city}, 
-          {property.state} 
+          {property.city},&nbsp; 
+          {property.state}&nbsp; 
           {property.zipCode}
+          {property.propertyCode ? <div className="idCode">{property.propertyCode}</div> : <button>Get Property Code</button>}
         </div>
       )
     })
 
     return (
       <div>
-        {Properties}        
+        {properties}        
       </div>
   
     )
