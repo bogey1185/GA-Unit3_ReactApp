@@ -133,6 +133,7 @@ class CreateProperty extends Component {
           <input type="submit" value="Submit" />
 
         </form>
+        {this.props.state.errorMsg ? <small>{this.props.state.errorMsg}</small> : null}
       </div>
     )
   }
