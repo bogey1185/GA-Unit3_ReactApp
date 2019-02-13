@@ -45,7 +45,7 @@ class RegisterUser extends Component {
         }
 
         //send data to server to create user
-        const createUserRequest = await fetch('http://localhost:9000/api/v1/users/registerLandlord', {
+        const createUserRequest = await fetch('http://localhost:9000/api/v1/users/registerlandlord', {
           method: 'POST',
           // credentials: 'include',
           body: JSON.stringify(newUser),
@@ -63,7 +63,7 @@ class RegisterUser extends Component {
         const parsedCreateRequest = await createUserRequest.json();
         
         //if create successful, return to login page
-        if (parsedCreateRequest.data === 'user created!') {
+        if (parsedCreateRequest.sysMsg === 'user created!') {
           this.props.history.push('/');
 
         } else {
@@ -90,7 +90,7 @@ class RegisterUser extends Component {
         }
 
         //send data to server to create user
-        const createUserRequest = await fetch('http://localhost:9000/api/v1/users/registerTenant', {
+        const createUserRequest = await fetch('http://localhost:9000/api/v1/users/registertenant', {
           method: 'POST',
           // credentials: 'include',
           body: JSON.stringify(newUser),
@@ -108,7 +108,7 @@ class RegisterUser extends Component {
         const parsedCreateRequest = await createUserRequest.json();
         
         //if create successful, return to login page
-        if (parsedCreateRequest.data === 'user created!') {
+        if (parsedCreateRequest.sysMsg === 'user created!') {
           this.props.history.push('/');
 
         } else {

@@ -11,11 +11,11 @@ class Login extends Component {
   constructor() {
     super();
     this.state = {
-      userLogged: false,
       userDesignation: '', 
       propertyCode: '',
       username: '',
-      password: ''
+      password: '',
+      errorMsg: ''
     }
   }
 
@@ -29,14 +29,15 @@ class Login extends Component {
     event.preventDefault();
     try {
 
+      const loginPath = 'login' + this.state.userDesignation;
       const loginCredentials = {
         username: this.state.username,
         password: this.state.password
       }
 
-      const loginResponse = await fetch('http://localhost:9000/api/v1/users/login', {
+      const loginResponse = await fetch(`http://localhost:9000/api/v1/users/${loginPath}`, {
         method: 'POST',
-        credentials: 'included',
+        // credentials: 'included',
         body: JSON.stringify(loginCredentials),
         headers: {'Content-Type': 'application/json'}
       })
@@ -46,16 +47,47 @@ class Login extends Component {
       }
 
       const parsedLoginResponse = await loginResponse.json();
-
-      if (parsedLoginResponse.data === 'login successful'){
+      console.log(parsedLoginResponse);
+      if (parsedLoginResponse.sysMsg === 'login successful'){
 
         if (this.state.userDesignation === 'landlord') {
-          this.props.history.push('/landlord');
+          this.props.history.push({
+            pathname: '/landlord',
+            state: parsedLoginResponse.data
+          });
         } else {
-          this.props.history.push('/tenant'/*add property code
-            to the path so that it goes to specific page?*/);
-            //need to change state to logged somewhere?
+          //if we are logging in as a tenant, we
+          //need to get the property object at issue so tenant can update it
+          //with photos and text the first time. subsequent times will be 
+          //read only
+          const propResponse = await fetch(`http://localhost:9000/api/vi/properties/${this.state.propertyCode}`, {
+            method: 'POST',
+            // credentials: 'included',
+            body: JSON.stringify(this.state.propertyCode),
+            headers: {'Content-Type': 'application/json'}
+          })
+
+          if (!propResponse.ok) {
+            throw Error(propResponse.statusText);
+          }
+
+          const parsedPropResponse = propResponse.json();
+          if (parsedPropResponse.sysMsg === 'property found'){
+            this.props.history.push({
+              pathname: '/tenant',
+              state: [parsedLoginResponse.data, parsedPropResponse.data]
+            });
+          } else {
+            this.setState({
+              errorMsg: 'Invalid property code. Please consult with your landlord.'
+            })
+          }
+
         }
+      } else {
+        this.setState({
+          errorMsg: 'Invalid username or password. Please try again.'
+        })
       }
               
     } catch (err) {
@@ -137,6 +169,7 @@ class Login extends Component {
             <input type="Submit" />
           </form>
           <br />
+          {this.state.errorMsg ? <small>{this.state.errorMsg}</small> : null}
           <small> Need an account? <Link to='/register'>Sign up</Link></small>
 
         </section>
