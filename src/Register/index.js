@@ -128,7 +128,6 @@ class RegisterUser extends Component {
 
 
   render() {
-    console.log(this.state);
     return(
       <div className="login">
         <section className="login-section">

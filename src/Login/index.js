@@ -47,14 +47,14 @@ class Login extends Component {
       }
 
       const parsedLoginResponse = await loginResponse.json();
-      console.log(parsedLoginResponse);
+      
       if (parsedLoginResponse.sysMsg === 'login successful'){
 
         if (this.state.userDesignation === 'landlord') {
-          this.props.history.push({
-            pathname: '/landlord',
-            state: parsedLoginResponse.data
-          });
+
+          this.props.handleLandlordLogin(parsedLoginResponse.data);
+          this.props.history.push('/landlord');
+          
         } else {
           //if we are logging in as a tenant, we
           //need to get the property object at issue so tenant can update it
@@ -72,11 +72,13 @@ class Login extends Component {
           }
 
           const parsedPropResponse = propResponse.json();
+
           if (parsedPropResponse.sysMsg === 'property found'){
             this.props.history.push({
               pathname: '/tenant',
               state: [parsedLoginResponse.data, parsedPropResponse.data]
             });
+
           } else {
             this.setState({
               errorMsg: 'Invalid property code. Please consult with your landlord.'
@@ -99,7 +101,6 @@ class Login extends Component {
 
   render() {
 
-    console.log(this.state);
     return(
       <div className="login">
         <section className="login-section">
