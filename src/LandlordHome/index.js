@@ -19,7 +19,7 @@ class LandlordHome extends Component {
 
   addProperty = async (newProperty) => {
 
-    const createRequest = await fetch(`${process.env.PATH}/api/v1/properties/`, {
+    const createRequest = await fetch(`${process.env.REACT_APP_PATH}/api/v1/properties/`, {
       method: 'POST',
       // credentials: 'include',
       body: JSON.stringify(newProperty),
@@ -54,7 +54,7 @@ class LandlordHome extends Component {
     }
 
     // query db update route with hash code
-    const updateRequest = await fetch(`${process.env.PATH}/api/v1/properties/${id}`, {
+    const updateRequest = await fetch(`${process.env.REACT_APP_PATH}/api/v1/properties/${id}`, {
       method: 'PUT',
       // credentials: 'include',
       body: JSON.stringify([randomHash]),
@@ -88,7 +88,7 @@ class LandlordHome extends Component {
     //array will prevent it from appearing on landlord's home page, though.
 
     //send query to DB -- will be update request because not deleting the whole db entry
-    const updateRequest = await fetch(`${process.env.PATH}/api/v1/users/${id}`, {
+    const updateRequest = await fetch(`${process.env.REACT_APP_PATH}/api/v1/users/${id}`, {
       method: 'PUT',
       // credentials: 'include',
       headers: {'Content-Type': 'application/json'}
@@ -110,7 +110,7 @@ class LandlordHome extends Component {
   findPropertyToEdit = async (id) => {
   
     //get the property data you want to edit
-    const request = await fetch(`${process.env.PATH}/api/v1/properties/${id}`, {
+    const request = await fetch(`${process.env.REACT_APP_PATH}/api/v1/properties/${id}`, {
       method: 'GET',
       // credentials: 'include',
       headers: {'Content-Type': 'application/json'}
@@ -130,7 +130,7 @@ class LandlordHome extends Component {
 
   editProperty = async (edittedProperty) => {
 
-    const editRequest = await fetch(`${process.env.PATH}/api/v1/properties/${edittedProperty._id}/edit`, {
+    const editRequest = await fetch(`${process.env.REACT_APP_PATH}/api/v1/properties/${edittedProperty._id}/edit`, {
         method: 'PUT',
         // credentials: 'include',
         body: JSON.stringify(edittedProperty),

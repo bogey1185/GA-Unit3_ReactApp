@@ -45,7 +45,7 @@ class RegisterUser extends Component {
         }
 
         //send data to server to create user
-        const createUserRequest = await fetch(`${process.env.PATH}/api/v1/users/registerlandlord`, {
+        const createUserRequest = await fetch(`${process.env.REACT_APP_PATH}/api/v1/users/registerlandlord`, {
           method: 'POST',
           // credentials: 'include',
           body: JSON.stringify(newUser),
@@ -90,7 +90,7 @@ class RegisterUser extends Component {
         }
 
         //send data to server to create user
-        const createUserRequest = await fetch(`${process.env.PATH}/api/v1/users/registertenant`, {
+        const createUserRequest = await fetch(`${process.env.REACT_APP_PATH}/api/v1/users/registertenant`, {
           method: 'POST',
           // credentials: 'include',
           body: JSON.stringify(newUser),
