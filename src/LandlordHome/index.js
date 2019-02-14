@@ -59,6 +59,10 @@ class LandlordHome extends Component {
       body: JSON.stringify([randomHash]),
       headers: {'Content-Type': 'application/json'}
     })
+
+    if(!updateRequest.ok) {
+        throw Error(updateRequest.statusText)
+    }
     
     //parse response
     const parsedUpdateRequest = await updateRequest.json();
@@ -78,17 +82,29 @@ class LandlordHome extends Component {
   }
 
   deleteProperty = async (id) => {
-    //this function will ONLY delete from landlord's propertyList array because
-    //we dont want the landlord to be able to delete the listing if the tenant
-    //uploads some solid damage photos. deleting from the array will prevent it from appearing on landlord's home page, though.
+    //this function will ONLY delete from landlord's propertyList array 
+    //because we dont want the landlord to be able to delete the listing 
+    //if the tenant uploads some solid damage photos. deleting from the 
+    //array will prevent it from appearing on landlord's home page, though.
 
-    //send query to DB -- will be update request, because not deleting the whole db entry
+    //send query to DB -- will be update request because not deleting the whole db entry
     const updateRequest = await fetch(`http://localhost:9000/api/v1/users/${id}`, {
       method: 'PUT',
       // credentials: 'include',
       headers: {'Content-Type': 'application/json'}
     })
-    
+    //check for thrown errors
+    if(!updateRequest.ok) {
+        throw Error(updateRequest.statusText)
+    }
+    //parse response from server
+    const parsedUpdateRequest = await updateRequest.json();
+    //update state to reflect changes
+    this.setState({
+      propertyList: this.state.propertyList.filter((property) => {
+        if (property._id !== parsedUpdateRequest.data) return property;
+      })
+    })
 
   }
 
