@@ -45,7 +45,7 @@ class LandlordHome extends Component {
   generatePropertyCode = async (id) => {
 
     //build random code
-    const charSet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()';
+    const charSet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
 
     let randomHash = '';
 
