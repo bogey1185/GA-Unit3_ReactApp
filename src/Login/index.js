@@ -59,10 +59,9 @@ class Login extends Component {
           //need to get the property object at issue so tenant can update it
           //with photos and text the first time. subsequent times will be 
           //read only
-          const propResponse = await fetch(`http://localhost:9000/api/vi/properties/${this.state.propertyCode}`, {
-            method: 'POST',
+          const propResponse = await fetch(`http://localhost:9000/api/v1/properties/show/${this.state.propertyCode}`, {
+            method: 'GET',
             // credentials: 'included',
-            body: JSON.stringify(this.state.propertyCode),
             headers: {'Content-Type': 'application/json'}
           })
 
@@ -70,17 +69,18 @@ class Login extends Component {
             throw Error(propResponse.statusText);
           }
 
-          const parsedPropResponse = propResponse.json();
+          const parsedPropResponse = await propResponse.json();
 
           if (parsedPropResponse.sysMsg === 'property found'){
             this.props.history.push({
-              pathname: '/tenant',
+              pathname: '/property',
               state: [parsedLoginResponse.data, parsedPropResponse.data]
             });
 
+
           } else {
             this.setState({
-              errorMsg: 'Invalid property code. Please consult with your landlord.'
+              errorMsg: 'Invalid property code. Please verify with your landlord.'
             })
           }
 

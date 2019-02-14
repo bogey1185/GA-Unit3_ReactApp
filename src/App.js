@@ -3,7 +3,7 @@ import './App.css';
 import { Route, Switch } from 'react-router-dom';
 import Header from './Header';
 import Login from './Login';
-import TenantHome from './TenantHome';
+import PropertyShow from './PropertyShow';
 import LandlordHome from './LandlordHome';
 import Register from './Register';
 
@@ -18,8 +18,6 @@ const My404 = () => {
 
 class App extends Component {
 
-
-
   render() {
     return(
       
@@ -30,7 +28,7 @@ class App extends Component {
             <Route exact path="/" component={ Login } /> 
             <Route exact path="/register" component={ Register } /> 
             <Route exact path="/landlord" component={ LandlordHome }  />
-            <Route exact path="/tenant" component={ TenantHome } />
+            <Route exact path="/property" component={ PropertyShow } />
             <Route component={ My404 } />
           </Switch>
         </main>
