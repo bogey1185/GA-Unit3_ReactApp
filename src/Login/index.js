@@ -35,7 +35,7 @@ class Login extends Component {
         password: this.state.password
       }
                         
-      const loginResponse = await fetch(`http://localhost:9000/api/v1/users/${loginPath}`, {
+      const loginResponse = await fetch(`${process.env.PATH}/api/v1/users/${loginPath}`, {
         method: 'POST',
         // credentials: 'included',
         body: JSON.stringify(loginCredentials),
@@ -59,7 +59,7 @@ class Login extends Component {
           //need to get the property object at issue so tenant can update it
           //with photos and text the first time. subsequent times will be 
           //read only
-          const propResponse = await fetch(`http://localhost:9000/api/v1/properties/show/${this.state.propertyCode}`, {
+          const propResponse = await fetch(`${process.env.PATH}/api/v1/properties/show/${this.state.propertyCode}`, {
             method: 'GET',
             // credentials: 'included',
             headers: {'Content-Type': 'application/json'}
