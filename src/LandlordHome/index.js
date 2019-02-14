@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import CreateProperty from './CreateProperty'
 import DisplayProperty from './DisplayProperty'
+import EditProperty from './EditProperty'
 
 class LandlordHome extends Component {
 
   constructor() {
     super();
     this.state = {
-
+      editProperty: null
     }
   }
 
@@ -71,7 +72,6 @@ class LandlordHome extends Component {
     this.setState({
       propertyList: await this.state.propertyList.map((property) => {
         if (property._id === parsedUpdateRequest.property._id) {
-          console.log('hit');
           return parsedUpdateRequest.property;
         } else {
           return property;
@@ -105,11 +105,56 @@ class LandlordHome extends Component {
         if (property._id !== parsedUpdateRequest.data) return property;
       })
     })
+  }
 
+  findPropertyToEdit = async (id) => {
+  
+    //get the property data you want to edit
+    const request = await fetch(`http://localhost:9000/api/v1/properties/${id}`, {
+      method: 'GET',
+      // credentials: 'include',
+      headers: {'Content-Type': 'application/json'}
+    })
+    //check for thrown errors
+    if(!request.ok) {
+        throw Error(request.statusText)
+    }
+    //parse response from server - we now have the property we want to edit
+    //in parsedRequest.data
+    const parsedRequest = await request.json();
+    //add edit property to state so we can render the appropriate forms
+    this.setState({
+      editProperty: parsedRequest.data
+    })
+  }
+
+  editProperty = async (edittedProperty) => {
+
+    const editRequest = await fetch(`http://localhost:9000/api/v1/properties/${edittedProperty._id}/edit`, {
+        method: 'PUT',
+        // credentials: 'include',
+        body: JSON.stringify(edittedProperty),
+        headers: {'Content-Type': 'application/json'}
+    })
+
+    if(!editRequest.ok) {
+        throw Error(editRequest.statusText)
+    }
+
+    const parsedEditRequest = await editRequest.json();
+
+    if (parsedEditRequest.sysMsg === 'Address Not Found') {
+      this.setState({errorMsg: 'Address not found. Please try again.'})
+    } else { // it worked
+      this.setState({
+        editProperty: '',
+        propertyList: parsedEditRequest.data.propertyList
+      })      
+    }
+    
   }
 
   render() {
-    console.log(this.state, 'LandlordHome STATE post update');
     
     return (
       <div>
@@ -120,8 +165,11 @@ class LandlordHome extends Component {
                ${this.state.lastName[0].toUpperCase() + this.state.lastName.slice(1)}`
             }'s Properties
         </h1> : null}
-        {this.state.propertyList.length > 0 ? <DisplayProperty properties={this.state.propertyList} generatePropertyCode={this.generatePropertyCode} deleteProperty={this.deleteProperty} /> : null}
-        <CreateProperty addProperty={this.addProperty} state={this.state}/>
+        {this.state.propertyList.length > 0 ? <DisplayProperty properties={this.state.propertyList} generatePropertyCode={this.generatePropertyCode} deleteProperty={this.deleteProperty} findPropertyToEdit={this.findPropertyToEdit} /> : null}
+        {this.state.editProperty ? 
+          <EditProperty editProperty={this.editProperty} state={this.state} /> : 
+          <CreateProperty addProperty={this.addProperty} state={this.state}/>
+        }
         
       </div>
     )
