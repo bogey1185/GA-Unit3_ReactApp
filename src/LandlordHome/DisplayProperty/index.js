@@ -8,15 +8,13 @@ class DisplayProperty extends Component {
 
   }
   
-
   componentWillMount = () => {
     this.setState(this.props.state)
   }
 
   render() {
-
-    console.log(this.state, 'DisplayProperty STATE');
-
+    console.log(this.props, 'display props');
+    console.log(this.state, 'display state');
     const properties = this.props.properties.map((property) => {
       return(
         <div key={property._id}>
@@ -24,8 +22,9 @@ class DisplayProperty extends Component {
           {property.unit ? `, ${property.unit}, ` : ', '}
           {property.city},&nbsp; 
           {property.state}&nbsp; 
-          {property.zipCode}
-          {property.propertyCode ? <div className="idCode">{property.propertyCode}</div> : <button>Get Property Code</button>}
+          {property.zipCode} &nbsp; 
+          {property.propertyCode ? <span className="idCode">{property.propertyCode}</span> : <button onClick={this.props.generatePropertyCode.bind(null, property._id)}>Get Property Code</button>}&nbsp;&nbsp;
+          <button onClick={this.props.deleteProperty.bind(null, property._id)}>Delete</button>&nbsp;&nbsp;
         </div>
       )
     })
