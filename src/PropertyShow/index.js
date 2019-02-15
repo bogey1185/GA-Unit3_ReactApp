@@ -31,7 +31,7 @@ class PropertyShow extends Component {
           <CreateEntry />
         </div>
         <div className="photoContainer">
-          <DisplayEntries entries={property.inspectionData}/>
+          <DisplayEntries inspectionData={property.inspectionData}/>
         </div>
       </div>
     )
