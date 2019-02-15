@@ -21,7 +21,6 @@ class DisplayEntries extends Component {
           <p className="entryText">{entry.text}</p>
           <div>
             <button onClick={this.state.handleClick.bind(null, entry._id, 'delete')}>Delete</button>
-            <button onClick={this.state.handleClick.bind(null, entry._id, 'edit')}>Edit</button>
           </div>
         </div>
       )
