@@ -13,8 +13,6 @@ class DisplayProperty extends Component {
   }
 
   render() {
-    console.log(this.props, 'display props');
-    console.log(this.state, 'display state');
     const properties = this.props.properties.map((property) => {
       return(
         <div key={property._id}>

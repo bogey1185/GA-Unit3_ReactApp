@@ -38,8 +38,6 @@ class EditProperty extends Component {
   }
 
   render() {
-    console.log(this.props, 'PROPS');
-    console.log(this.state, 'STATE');
     return (
       <div>
         

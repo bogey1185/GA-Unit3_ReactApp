@@ -3,21 +3,26 @@
   align-items: center;
   justify-content: center;
   text-align: justify;
+  background-image: url(https://www.cleanpix.com.au/images/1751_INT_Living_View03_C.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 94vh;
 }
 
 .uiContainer {
-  background-color: rgba(0, 0, 60, .5);
-  height: 100vh;
+  height: 94vh;
   width: 30vw;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: center;
+  align-items: stretch;
+  padding-left: 2vh;
+  background-color: rgba(0, 0, 0, .7);
 }
 
 .photoContainer {
-  background-color: rgba(0, 0, 0, .2);
-  height: 100vh;
+  height: 94vh;
   width: 70vw;
   display: flex;
   justify-content: center;
@@ -25,10 +30,18 @@
 }
 
 .title p {
-  text-align: center;
   margin: 0;
 }
 
 .title {
   margin-top: 10vh;
+  color: white;
+  font-weight: 700;
+  font-size: 1.5em;
+  font-family: 'Playfair Display', serif;
+}
+
+.textBox {
+  height: 40vh;
+  width: 20vw;
 }

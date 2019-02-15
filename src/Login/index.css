@@ -3,6 +3,11 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  background-image: url(https://www.lawdepot.com/blog/wp-content/uploads/2018/07/using-your-rental-property-as-an-airbnb.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 94vh;
 }
 
 .login-section {
@@ -17,5 +22,7 @@
   border-radius: 10px;
   margin: 0 1vw;
   padding: 10px 10px 20px 10px;
+  background-color: rgba(255, 255, 255, .8);
+  
 }
 

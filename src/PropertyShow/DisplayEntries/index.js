@@ -1,24 +1,38 @@
 import React, { Component } from 'react';
 import './index.css';
+import { Link } from 'react-router-dom';
 
-const DisplayEntries = (props) => {
+class DisplayEntries extends Component {
 
-  const entries = props.inspectionData.map((entry) => {
+  constructor() {
+    super();
+  }
+
+  componentWillMount() {
+    this.setState(this.props);
+  }
+
+  render() {
+    // add links to the photos so when you click, they get bigger
+    const entries = this.state.inspectionData.map((entry) => {
+      return (
+        <div className="submission" key={entry._id}>
+          <img src={entry.imageUrl} /><br />
+          <p className="entryText">{entry.text}</p>
+          <div>
+            <button onClick={this.state.handleClick.bind(null, entry._id, 'delete')}>Delete</button>
+            <button onClick={this.state.handleClick.bind(null, entry._id)}>Edit</button>
+          </div>
+        </div>
+      )
+    })
+  
     return (
-      <div submission>
-        <img src={entry.imgUrl} /><br />
-        <p className="entryText">{entry.text}</p>
-        <small>Uploaded: {entry.uploadDate}</small>
-      </div>
+      <div className="photoDisplay">{entries}</div>
     )
-  })
+    
+  }
 
-   
-
-
-  return (
-    <div className="photoDisplay">{entries}</div>
-  )
 }
 
 
