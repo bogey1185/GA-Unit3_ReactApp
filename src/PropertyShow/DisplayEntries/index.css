@@ -1,0 +1,6 @@
+.photoDisplay {
+  height: 80%;
+  width: 80%;
+  background-color: rgba(0, 0, 0, .5);
+  border: 2px solid black;
+}

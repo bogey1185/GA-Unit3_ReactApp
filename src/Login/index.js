@@ -70,7 +70,7 @@ class Login extends Component {
           }
 
           const parsedPropResponse = await propResponse.json();
-
+          console.log(parsedLoginResponse.data, "PARSED LOGIN", parsedPropResponse.data, "PARSED PROP");
           if (parsedPropResponse.sysMsg === 'property found'){
             this.props.history.push({
               pathname: '/property',

@@ -102,7 +102,9 @@ class LandlordHome extends Component {
     //update state to reflect changes
     this.setState({
       propertyList: this.state.propertyList.filter((property) => {
-        if (property._id !== parsedUpdateRequest.data) return property;
+        if (property._id !== parsedUpdateRequest.data) {
+          return property;
+        }
       })
     })
   }
