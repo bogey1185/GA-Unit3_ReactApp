@@ -15,7 +15,7 @@ class DisplayProperty extends Component {
   render() {
     const properties = this.props.properties.map((property) => {
       return(
-        <div key={property._id}>
+        <div key={property._id} className="properties">
           {property.street}
           {property.unit ? `, ${property.unit}, ` : ', '}
           {property.city},&nbsp; 

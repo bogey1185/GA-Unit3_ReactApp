@@ -1,0 +1,37 @@
+.main {
+  /*display: flex;*/
+  background-color: rgba(0, 0, 0, .5);
+  background-image: url(https://www.lawdepot.com/blog/wp-content/uploads/2018/07/4-Signs-That-a-Guest-Has-Become-a-Tenant.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 94vh;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 60vw;
+  height: 94vh;
+  background-color: rgba(255, 255, 255, .8);
+  margin-left: 20px;
+  padding-left: 20px;
+  padding-top: 40px;
+}
+
+h1 {
+  margin-bottom: 20px;
+}
+
+span {
+  color: red;
+  border: 1px solid red;
+  border-radius: 5px;
+  padding: 2px;
+  background-color: white;
+}
+
+.properties {
+  padding: 4px;
+}

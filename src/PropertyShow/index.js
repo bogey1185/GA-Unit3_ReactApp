@@ -16,8 +16,49 @@ class PropertyShow extends Component {
     })
   }
 
-  handleClick = (id, btnFaceValue, event) => {
+  handleClick = async (id, btnFaceValue, event) => {
+    try {
+      
+      if (btnFaceValue === 'delete') {
+        //route for delete button
+        const updateRequest = await fetch(`${process.env.REACT_APP_PATH}/api/v1/submissions/${id}`, {
+          method: 'DELETE',
+          // credentials: 'include',
+          headers: {'Content-Type': 'application/json'}
+        })
+        //check for thrown errors
+        if(!updateRequest.ok) {
+            throw Error(updateRequest.statusText)
+        }
+        const parsedRequest = await updateRequest.json();
+
+        console.log(this.state, "THIS STATE)");
+        console.log(parsedRequest._id);
+       
+        let matchingIdx = null;
+        const dataArray = this.state.property.inspectionData;
+        for (let i = 0; i < dataArray.length; i++) {
+          const values = Object.values(dataArray[i]);
+          if (values.includes(parsedRequest._id)) {
+            matchingIdx = i;
+          }
+        }
+
+        const theState = this.state;
+        theState.property.inspectionData.splice(matchingIdx, 1);
+        this.setState(theState);
+
+        console.log(this.state, 'THE NEW STATE');
+
+      } else {
+        //route for edit button
+      }
+          
+    } catch (err) {
+      console.log(err);
+      return(err);
     
+    }
   }
 
   addSubmission = async (newSubmission) => {

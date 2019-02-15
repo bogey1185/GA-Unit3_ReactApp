@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import CreateProperty from './CreateProperty'
 import DisplayProperty from './DisplayProperty'
 import EditProperty from './EditProperty'
+import './index.css';
 
 class LandlordHome extends Component {
 
@@ -159,21 +160,24 @@ class LandlordHome extends Component {
   render() {
     
     return (
-      <div>
-        {this.state.firstName ? 
-        <h1>{this.state.businessName ? 
-              `${this.state.businessName}` : 
-              `${this.state.firstName[0].toUpperCase() + this.state.firstName.slice(1)} 
-               ${this.state.lastName[0].toUpperCase() + this.state.lastName.slice(1)}`
-            }'s Properties
-        </h1> : null}
-        {this.state.propertyList.length > 0 ? <DisplayProperty properties={this.state.propertyList} generatePropertyCode={this.generatePropertyCode} deleteProperty={this.deleteProperty} findPropertyToEdit={this.findPropertyToEdit} /> : null}
-        {this.state.editProperty ? 
-          <EditProperty editProperty={this.editProperty} state={this.state} /> : 
-          <CreateProperty addProperty={this.addProperty} state={this.state}/>
-        }
-        
+      
+      <div className="main">
+        <div className="list">
+          {this.state.firstName ? 
+          <h1>{this.state.businessName ? 
+                `${this.state.businessName}` : 
+                `${this.state.firstName[0].toUpperCase() + this.state.firstName.slice(1)} 
+                 ${this.state.lastName[0].toUpperCase() + this.state.lastName.slice(1)}`
+              }'s Properties
+          </h1> : null}
+          {this.state.propertyList.length > 0 ? <DisplayProperty properties={this.state.propertyList} generatePropertyCode={this.generatePropertyCode} deleteProperty={this.deleteProperty} findPropertyToEdit={this.findPropertyToEdit} /> : null}
+          {this.state.editProperty ? 
+            <EditProperty editProperty={this.editProperty} state={this.state} /> : 
+            <CreateProperty addProperty={this.addProperty} state={this.state}/>
+          }
+        </div>
       </div>
+      
     )
   }
 
